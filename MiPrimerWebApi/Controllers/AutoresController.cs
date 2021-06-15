@@ -27,9 +27,9 @@ namespace MiPrimerWebApi.Controllers
         }
 
         [HttpGet("{id}", Name = "ObtenerAutor")]
-        public ActionResult<Autor> Get(int id)
+        public async Task<ActionResult<Autor>> Get(int id)
         {
-            var autor = context.Autores.FirstOrDefault(x => x.Id == id);
+            var autor = await context.Autores.FirstOrDefaultAsync(x => x.Id == id);
             if (autor == null)
             {
                 return NotFound();
@@ -38,10 +38,10 @@ namespace MiPrimerWebApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] Autor autor)
+        public async Task<ActionResult> Post([FromBody] Autor autor)
         {
             context.Autores.Add(autor);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             return new CreatedAtRouteResult("ObtenerAutor", new { Id = autor.Id }, autor);
         }
