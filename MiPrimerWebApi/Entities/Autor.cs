@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiPrimerWebApi.Migrations.Validaciones;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,6 +13,7 @@ namespace MiPrimerWebApi.Entities
         public int Id { get; set; }
         [Required(ErrorMessage ="EL campo nombre es requerido")]
         [StringLength(maximumLength: 4, ErrorMessage ="El campo {0} no debe tener más de {1} carácteres")]
+        [PrimeraLetraMayuscula]
         public string Nombre { get; set; }
         [Range(18,120)] 
         [NotMapped]

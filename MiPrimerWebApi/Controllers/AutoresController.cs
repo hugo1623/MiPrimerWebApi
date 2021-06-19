@@ -80,7 +80,6 @@ namespace MiPrimerWebApi.Controllers
             return Ok();
         }
 
-
         [HttpGet("{id:int}/{param2-persona}")]
         public async Task<ActionResult<Autor>> Get(int id, string param2)
         {
