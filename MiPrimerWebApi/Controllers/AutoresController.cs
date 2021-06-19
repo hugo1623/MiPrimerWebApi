@@ -26,7 +26,7 @@ namespace MiPrimerWebApi.Controllers
             return context.Autores.ToList();
         }
 
-        [HttpGet("{id}", Name = "ObtenerAutor")]
+       [HttpGet("{id}", Name = "ObtenerAutor")]
         public async Task<ActionResult<Autor>> Get(int id)
         {
             var autor = await context.Autores.FirstOrDefaultAsync(x => x.Id == id);
@@ -78,6 +78,25 @@ namespace MiPrimerWebApi.Controllers
             context.Remove(new Autor() { Id = id });
             await context.SaveChangesAsync();
             return Ok();
+        }
+
+
+        [HttpGet("{id:int}/{param2-persona}")]
+        public async Task<ActionResult<Autor>> Get(int id, string param2)
+        {
+            var autor = await context.Autores.FirstOrDefaultAsync(x => x.Id == id);
+            if (autor == null)
+            {
+                return NotFound();
+            }
+            return autor;
+        }
+
+
+        [HttpGet("primero")] //api/autores/primero?nombre=hugo&apellido=luis
+        public async Task<ActionResult<Autor>> PrimerAutor([FromHeader] int miValor, [FromQuery] string nombre)
+        {
+            return await context.Autores.FirstOrDefaultAsync();
         }
     }
 }
